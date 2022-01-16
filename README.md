@@ -1,5 +1,5 @@
 # Проект: Место
-ссылка на GitHub Pages https://pankiale.github.io/mesto/
+ссылка на GitHub Pages https://pankiale.github.io/mesto-project/
 
 ## Обзор
 Фотосервис позволяющий создавать карточки с именем фото и профессией и хранить коллекцию фото с названием внутри каждой карточки
