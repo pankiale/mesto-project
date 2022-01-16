@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Место</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body class="page">
+<header class="header">
+  <a href="#"><img class="header__logo active-element active-element_hover_all-other" src="./images/logo.svg"
+                   alt="лого"/></a>
+</header>
+<main class="content">
+  <section class="profile">
+    <img class="profile__avatar" src="./images/kusto.jpg" alt="Аватар пользователя">
+    <h1 class="profile__title">Жак-Ив Кусто</h1>
+    <button aria-label="кнопка редактирования профиля"
+            class="profile__edit-button  active-element active-element_hover_all-other" type="button"></button>
+    <p class="profile__subtitle">Исследователь океана</p>
+    <button aria-label="кнопка добавления профиля"
+            class="profile__add-button  active-element active-element_hover_all-other" type="button"></button>
+  </section>
+  <section class="elements">
+  </section>
+</main>
+<footer class="footer">
+  <p class="footer__copyright">© 2020 Mesto Russia</p>
+</footer>
+<template id="element-template">
+  <article class="element">
+    <img class="element__image" src="./images/karachaevsk.jpg" alt="Карачаевск">
+    <button class="element__delete-button active-element active-element_hover_all-other"
+            aria-label=" кнопка удаления фотокарточки" type="button"></button>
+    <div class="element__wrapper">
+      <h2 class=" element__title">Карачаевск</h2>
+      <button class="element__like-button  active-element active-element_hover_like" type="button"></button>
+    </div>
+  </article>
+</template>
+<div class="popup popup_type_avatar">
+  <div class="popup__container">
+    <button aria-label="кнопка закрытия поп-ап"
+            class="popup__close-button popup__close-button_avatar active-element active-element_hover_all-other"
+            type="button"></button>
+    <form class="form form_prof" name="form_prof">
+      <h2 class="form__title">Редактировать профиль</h2>
+      <fieldset class="form__input-container">
+        <input type="text" name="prof_title" class="form__item form__item_prof_title" required>
+        <input type="text" name="prof_subtitle" class="form__item form__item_prof_subtitle" required>
+      </fieldset>
+      <button class="form__save-button  active-element active-element_hover_save-button" type="submit">Сохранить
+      </button>
+    </form>
+  </div>
+</div>
+<div class="popup popup_type_photo-card">
+  <div class="popup__container">
+    <button aria-label="кнопка закрытия поп-ап"
+            class="popup__close-button  popup__close-button_photo-card active-element active-element_hover_all-other"
+            type="button"></button>
+    <form class="form form_photo" name="form_photo">
+      <h2 class="form__title">Новое место</h2>
+      <fieldset class="form__input-container">
+        <input placeholder="Название" type="text" name="photo_title" class="form__item form__item_photo_title" required>
+        <input placeholder="Ссылка на картинку" type="text" name="photo_subtitle"
+               class="form__item form__item_photo_link" required>
+      </fieldset>
+      <button class="form__save-button  active-element active-element_hover_save-button" type="submit">Сохранить
+      </button>
+    </form>
+  </div>
+</div>
+<div class="popup popup_type_photo-scaled">
+  <div class="popup__container popup__container_type_photo-scaled">
+    <button aria-label="кнопка закрытия поп-ап"
+            class="popup__close-button  popup__close-button_photo-scaled active-element active-element_hover_all-other"
+            type="button"></button>
+    <img class="popup__image-scaled" src="./images/karachaevsk.jpg" alt="Карачаевск">
+    <h2 class="popup__title">Карачаевск</h2>
+  </div>
+
+</div>
+<script src="scripts/script.js"></script>
+</body>
+
+</html>

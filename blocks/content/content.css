@@ -1,0 +1,14 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 36px 0 67px;
+  z-index: 0;
+}
+
+@media screen and (max-width: 590px) {
+  .content {
+    padding: 42px 19px 48px;
+  }
+}

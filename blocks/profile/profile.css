@@ -1,0 +1,23 @@
+.profile {
+	display: grid;
+	grid-template-columns: min-content auto 1fr min-content;
+	grid-template-areas:
+			'avatar title edit-button add-button'
+			'avatar subtitle . add-button';
+	margin-bottom: 47px;
+	column-gap: 20px;
+	row-gap: 8px;
+}
+
+@media screen and (max-width: 590px) {
+	.profile {
+		column-gap: 10px;
+		row-gap: unset;
+		align-self: center;
+		grid-template-columns: 34px auto 34px;
+		grid-template-areas:
+			'avatar avatar avatar' '. title edit-button'
+			'. subtitle .' 'add-button add-button add-button';
+		margin-bottom: 36px;
+	}
+}

@@ -1,0 +1,11 @@
+.footer {
+	display: flex;
+	flex-direction: row;
+	margin: 0;
+}
+
+@media screen and (max-width: 590px) {
+	.footer {
+		margin: 0 19px;
+	}
+}
