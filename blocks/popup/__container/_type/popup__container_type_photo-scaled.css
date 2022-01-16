@@ -4,6 +4,6 @@
   box-shadow: unset;
   max-width: 75vw;
   max-height: 75vh;
-  width: max-content;
-  height: max-content;
+  width: auto;
+  height: auto;
 }
