@@ -19,6 +19,8 @@ const photoName = document.querySelector('.form__item_photo_title');
 const photoLink = document.querySelector('.form__item_photo_link');
 const photoTemplate = document.querySelector('#element-template').content;
 let photoCard = undefined;
+const photoCardImageScaled = document.querySelector('.popup__image-scaled');
+const photoCardNameScaled = document.querySelector('.popup__title');
 
 
 /*  задаем фунцию для добавления фотокарточки*/
@@ -27,6 +29,25 @@ function createPhoto(photoName, photoLink) {
   photoCard.querySelector('.element__title').textContent = photoName;
   photoCard.querySelector('.element__image').src = photoLink;
   photoCard.querySelector('.element__image').alt = photoName;
+
+  let photoCardLikeButton = photoCard.querySelector('.element__like-button');
+    photoCardLikeButton.addEventListener('click', () => {
+    photoCardLikeButton.classList.toggle('element__like-button_active');
+    });
+
+  let photoCardImage = photoCard.querySelector('.element__image');
+    photoCardImage.addEventListener('click', () => {
+      photoCardImageScaled.src = photoLink;
+      photoCardImageScaled.alt = photoName;
+      photoCardNameScaled.textContent = photoName;
+    openPopUp(popupPhotoScaled);
+    });
+
+  let photoCardDeleteButton = photoCard.querySelector('.element__delete-button');
+    photoCardDeleteButton.addEventListener('click', () => {
+      photoCardDeleteButton.closest('.element').remove();
+    });
+
   return photoCard;
 };
 
@@ -34,6 +55,57 @@ function createPhoto(photoName, photoLink) {
 function renderPhoto(photo) {
   photoContainer.prepend(photo);
 };
+
+/*  задаем фунцию открытия попап только для попап профиля забираем данные для формы из дом*/
+function openPopUp(popupName) {
+  popupName.classList.add('popup_open');
+};
+
+/*  задаем фунцию закрытия попап только для попап профиля обнуляем данные в форме*/
+function closePopUp(popupName) {
+  popupName.classList.remove('popup_open');
+};
+
+/*  задаем фунцию сабмита данных*/
+function submitProfileForm(evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopUp(popupProfile);
+};
+
+/*обрабатывает фото карточку - забирает имя и ссылку из формы, передает их функции addphoto
+(добавление фотокарточки на страницу) и обнуляет поля имя и ссылка в форме затем вызывает closePopUp*/
+function submitPhotoForm(evt) {
+  evt.preventDefault();
+  createPhoto(photoName.value, photoLink.value);
+  renderPhoto(photoCard);
+  photoName.value = '';
+  photoLink.value = '';
+  closePopUp(popupPhoto);
+};
+
+buttonEditProfile.addEventListener('click', () => {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+  openPopUp(popupProfile);
+});
+buttonCloseProfile.addEventListener('click', () => {
+  closePopUp(popupProfile);
+  nameInput.value = '';
+  jobInput.value = '';
+});
+buttonSubmitProfile.addEventListener('submit', (evt) => {
+  submitProfileForm(evt);
+  nameInput.value = '';
+  jobInput.value = '';
+  });
+
+buttonAddPhoto.addEventListener('click', openPopUp.bind(null, popupPhoto));
+buttonClosePhoto.addEventListener('click', closePopUp.bind(null, popupPhoto));
+buttonSubmitPhoto.addEventListener('submit', submitPhotoForm);
+
+buttonClosePhotoScaled.addEventListener('click', closePopUp.bind(null, popupPhotoScaled));
 
 /*  проверяем что контейнер элементс пустой и заполняем его 6 карточками.
 цикл обратный чтобы сделать фунцию добавления карточи универсальной через prepend*/
@@ -45,67 +117,3 @@ if (element === null) {
     renderPhoto(photoCard);
   }
 };
-
-/*  задаем фунцию открытия попап только для попап профиля забираем данные для формы из дом*/
-function openPopUp(popupName) {
-  popupName.classList.add('popup_open');
-  if (popupName === popupProfile) {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-  }
-};
-
-/*  задаем фунцию закрытия попап только для попап профиля обнуляем данные в форме*/
-function closePopUp(popupName) {
-  popupName.classList.remove('popup_open');
-  if (popupName === popupProfile) {
-    nameInput.value = '';
-    jobInput.value = '';
-  }
-};
-
-/*  задаем фунцию сабмита данных*/
-function profileFormSubmitHandler(evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopUp(popupProfile);
-};
-
-/*обрабатывает фото карточку - забирает имя и ссылку из формы, передает их функции addphoto
-(добавление фотокарточки на страницу) и обнуляет поля имя и ссылка в форме затем вызывает closePopUp*/
-function photoFormSubmitHandler(evt) {
-  evt.preventDefault();
-  createPhoto(photoName.value, photoLink.value);
-  renderPhoto(photoCard);
-  photoName.value = '';
-  photoLink.value = '';
-  closePopUp(popupPhoto);
-};
-
-/*  слушатели событий кроме работы с карточками*/
-buttonEditProfile.addEventListener('click', openPopUp.bind(null, popupProfile));
-buttonAddPhoto.addEventListener('click', openPopUp.bind(null, popupPhoto))
-buttonCloseProfile.addEventListener('click', closePopUp.bind(null, popupProfile));
-buttonClosePhoto.addEventListener('click', closePopUp.bind(null, popupPhoto));
-buttonClosePhotoScaled.addEventListener('click', closePopUp.bind(null, popupPhotoScaled));
-buttonSubmitProfile.addEventListener('submit', profileFormSubmitHandler);
-buttonSubmitPhoto.addEventListener('submit', photoFormSubmitHandler);
-
-/* один слушатель чтобы избежать большого числа слушателей если пользователь создаст много фотокарточек
-ставим лайки  удаляем карточки и открываем карточки на большой экран*/
-photoContainer.addEventListener('click', function (event) {
-  if (event.target.className.includes('element__like-button')) {
-    event.target.classList.toggle('element__like-button_active');
-  }
-  if (event.target.className.includes('element__delete-button')) {
-    event.target.closest('.element').remove();
-  }
-  if (event.target.className === 'element__image') {
-    document.querySelector('.popup__title').textContent = event.target.alt;
-    document.querySelector('.popup__image-scaled').src = event.target.src;
-    document.querySelector('.popup__image-scaled').alt = event.target.alt;
-    openPopUp(popupPhotoScaled);
-  }
-});
-
