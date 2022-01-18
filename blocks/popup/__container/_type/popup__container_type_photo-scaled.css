@@ -1,9 +1,10 @@
 .popup__container_type_photo-scaled {
+  display: block;
   background-color: transparent;
   border: unset;
   box-shadow: unset;
   max-width: 75vw;
   max-height: 75vh;
-  width: auto;
-  height: auto;
+  width: initial;
+  height: initial;
 }
