@@ -18,7 +18,7 @@ const jobInput = document.querySelector('.form__item_prof_subtitle');
 const photoName = document.querySelector('.form__item_photo_title');
 const photoLink = document.querySelector('.form__item_photo_link');
 const photoTemplate = document.querySelector('#element-template').content;
-let photoCard = undefined;
+let photoCard = undefined; /* если опредлеяю ее локально то код ломается потому что фото кард не видно другим фунциям и он приходит пустой*/
 const photoCardImageScaled = document.querySelector('.popup__image-scaled');
 const photoCardNameScaled = document.querySelector('.popup__title');
 
@@ -30,12 +30,12 @@ function createPhoto(photoName, photoLink) {
   photoCard.querySelector('.element__image').src = photoLink;
   photoCard.querySelector('.element__image').alt = photoName;
 
-  let photoCardLikeButton = photoCard.querySelector('.element__like-button');
+  const photoCardLikeButton = photoCard.querySelector('.element__like-button');
     photoCardLikeButton.addEventListener('click', () => {
     photoCardLikeButton.classList.toggle('element__like-button_active');
     });
 
-  let photoCardImage = photoCard.querySelector('.element__image');
+  const photoCardImage = photoCard.querySelector('.element__image');
     photoCardImage.addEventListener('click', () => {
       photoCardImageScaled.src = photoLink;
       photoCardImageScaled.alt = photoName;
@@ -43,7 +43,7 @@ function createPhoto(photoName, photoLink) {
     openPopUp(popupPhotoScaled);
     });
 
-  let photoCardDeleteButton = photoCard.querySelector('.element__delete-button');
+  const photoCardDeleteButton = photoCard.querySelector('.element__delete-button');
     photoCardDeleteButton.addEventListener('click', () => {
       photoCardDeleteButton.closest('.element').remove();
     });
