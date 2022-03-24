@@ -1,3 +1,9 @@
+import './../pages/index.css';
+
+import { initialCards } from './jsConstant';
+import { validationConfig } from './jsConstant';
+import { enableValidation } from './validation';
+
 const content = document.querySelector('.content');
 const element = content.querySelector('.element');
 const photoContainer = document.querySelector('.elements');
@@ -117,3 +123,5 @@ if (element === null) {
     renderPhoto(photoCard);
   }
 };
+
+enableValidation(validationConfig);
