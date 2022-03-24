@@ -24,14 +24,13 @@ const jobInput = document.querySelector('.form__item_prof_subtitle');
 const photoName = document.querySelector('.form__item_photo_title');
 const photoLink = document.querySelector('.form__item_photo_link');
 const photoTemplate = document.querySelector('#element-template').content;
-let photoCard = undefined; /* если опредлеяю ее локально то код ломается потому что фото кард не видно другим фунциям и он приходит пустой*/
 const photoCardImageScaled = document.querySelector('.popup__image-scaled');
 const photoCardNameScaled = document.querySelector('.popup__title');
 
 
 /*  задаем фунцию для добавления фотокарточки*/
 function createPhoto(photoName, photoLink) {
-  photoCard = photoTemplate.querySelector('.element').cloneNode(true);
+  const photoCard = photoTemplate.querySelector('.element').cloneNode(true);
   photoCard.querySelector('.element__title').textContent = photoName;
   photoCard.querySelector('.element__image').src = photoLink;
   photoCard.querySelector('.element__image').alt = photoName;
@@ -84,8 +83,7 @@ function submitProfileForm(evt) {
 (добавление фотокарточки на страницу) и обнуляет поля имя и ссылка в форме затем вызывает closePopUp*/
 function submitPhotoForm(evt) {
   evt.preventDefault();
-  createPhoto(photoName.value, photoLink.value);
-  renderPhoto(photoCard);
+  renderPhoto(createPhoto(photoName.value, photoLink.value));
   photoName.value = '';
   photoLink.value = '';
   closePopUp(popupPhoto);
@@ -119,8 +117,7 @@ if (element === null) {
   for (let i = initialCards.length - 1; i > -1; i -= 1) {
     const photoName = initialCards[i].name;
     const photoLink = initialCards[i].link;
-    createPhoto(photoName, photoLink);
-    renderPhoto(photoCard);
+    renderPhoto(createPhoto(photoName, photoLink));
   }
 };
 
