@@ -19,7 +19,7 @@ const checkInputValidity = (inputElement, formElement, config) => {
   };
 };
 
-const toggleButtonState = (button, isActive = false, config) => {
+export const toggleButtonState = (button, isActive = false, config) => {
   if (isActive) {
     button.classList.remove(config.inactiveButtonClass);
     button.disabled = false;
@@ -34,8 +34,6 @@ const setEventListener = (formElement, config) => {
 
   const submitButton = formElement.querySelector(config.submitButtonSelector);
   const inputFormList = formElement.querySelectorAll(config.inputSelector);
-
-  toggleButtonState(submitButton, false, config);
 
   formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
