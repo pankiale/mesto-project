@@ -6,24 +6,27 @@ function handleEscKey (evt) {
   };
 }
 
-function handleOverlayClick (evt) {
-  if (evt.target.classList.contains('popup_open')) {
-    closePopUp(evt.target);
-  };
-}
-
-/*  задаем фунцию открытия попап только для попап профиля забираем данные для формы из дом*/
 export function openPopUp(popupName) {
   popupName.classList.add('popup_open');
   document.addEventListener('keydown', handleEscKey);
-  document.addEventListener('mousedown', handleOverlayClick);
-
 };
 
-/*  задаем фунцию закрытия попап только для попап профиля обнуляем данные в форме*/
 export function closePopUp(popupName) {
   popupName.classList.remove('popup_open');
   document.removeEventListener('keydown', handleEscKey);
-  document.removeEventListener('mousedown', handleOverlayClick);
 };
 
+/*Геннадий а вы как репетитор работаете? я бы с удовольствием с вами позанимался*/
+export function setPopupEventListeners() {
+  const popups = document.querySelectorAll('.popup')
+  popups.forEach((popup) => {
+      popup.addEventListener('mousedown', (evt) => {
+          if (evt.target.classList.contains('popup_open')) {
+            closePopUp(popup);
+          }
+          if (evt.target.classList.contains('popup__close-button')) {
+            closePopUp(popup);
+          }
+      })
+  })
+}

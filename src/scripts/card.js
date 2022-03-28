@@ -1,6 +1,5 @@
 import { initialCards } from './jsConstant';
 import { openPopUp } from "./modals";
-/*  задаем фунцию для добавления фотокарточки*/
 const photoCardImageScaled = document.querySelector('.popup__image-scaled');
 const photoCardNameScaled = document.querySelector('.popup__title');
 const popupPhotoScaled = document.querySelector('.popup_type_photo-scaled');
@@ -37,7 +36,6 @@ export function createPhoto(photoName, photoLink) {
   return photoCard;
 };
 
-/*  задаем фунцию для отрисовки фотокарточки*/
 export function renderPhoto(photo) {
   photoContainer.prepend(photo);
 };

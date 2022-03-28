@@ -5,12 +5,9 @@ import { renderPhoto } from './card';
 import { validationConfig } from "./jsConstant";
 import { toggleButtonState } from "./validation";
 const buttonAddPhoto = document.querySelector('.profile__add-button');
-const buttonClosePhoto = document.querySelector('.popup__close-button_photo-card');
-const buttonClosePhotoScaled = document.querySelector('.popup__close-button_photo-scaled');
 const buttonSubmitPhoto = document.querySelector('.form_photo');
 const popupPhoto = document.querySelector('.popup_type_photo-card');
 const formReset = popupPhoto.querySelector('.form');
-const popupPhotoScaled = document.querySelector('.popup_type_photo-scaled');
 const photoName = document.querySelector('.form__item_photo_title');
 const photoLink = document.querySelector('.form__item_photo_link');
 const submitButton = popupPhoto.querySelector('.form__save-button');
@@ -31,9 +28,5 @@ buttonAddPhoto.addEventListener('click', () => {
   errorInputs.forEach(error => error.classList.remove('form__item_error'));
   toggleButtonState(submitButton, false, validationConfig);
 });
-buttonClosePhoto.addEventListener('click', closePopUp.bind(null, popupPhoto));
 buttonSubmitPhoto.addEventListener('submit', submitPhotoForm);
-buttonClosePhotoScaled.addEventListener('click', () => {
-  closePopUp(popupPhotoScaled);
-});
 };
