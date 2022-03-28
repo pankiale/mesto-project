@@ -1,6 +1,7 @@
 import { openPopUp } from "./modals";
 import { closePopUp } from "./modals";
-
+import { validationConfig } from "./jsConstant";
+import { toggleButtonState } from "./validation";
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
@@ -9,6 +10,7 @@ const popupProfile = document.querySelector('.popup_type_avatar');
 const buttonSubmitProfile = document.querySelector('.form_prof');
 const nameInput = document.querySelector('.form__item_prof_title');
 const jobInput = document.querySelector('.form__item_prof_subtitle');
+const submitButton = popupProfile.querySelector('.form__save-button');
 
 /*  задаем фунцию сабмита данных*/
 function submitProfileForm(evt) {
@@ -27,15 +29,12 @@ buttonEditProfile.addEventListener('click', () => {
   errorMessages.forEach(error => error.textContent = '');
   const errorInputs = popupProfile.querySelectorAll('.form__item_error');
   errorInputs.forEach(error => error.classList.remove('form__item_error'));
+  toggleButtonState(submitButton, false, validationConfig);
 });
 buttonCloseProfile.addEventListener('click', () => {
   closePopUp(popupProfile);
-  nameInput.value = '';
-  jobInput.value = '';
 });
 buttonSubmitProfile.addEventListener('submit', (evt) => {
   submitProfileForm(evt);
-  nameInput.value = '';
-  jobInput.value = '';
   });
 };
