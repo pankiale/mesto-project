@@ -40,6 +40,6 @@ export function renderPhoto(photo) {
   photoContainer.prepend(photo);
 };
 
-export function createInitialSetOfCards () {
-  initialCards.reverse().forEach(card => renderPhoto(createPhoto(card.name, card.link)));
+export function createInitialSetOfCards (data) {
+  data.forEach(card => renderPhoto(createPhoto(card.name, card.link)));
 };
