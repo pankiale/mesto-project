@@ -2,6 +2,7 @@ import { openPopUp } from "./modals";
 import { closePopUp } from "./modals";
 import { validationConfig } from "./jsConstant";
 import { toggleButtonState } from "./validation";
+import { editProfileData } from "./api";
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
@@ -10,11 +11,22 @@ const buttonSubmitProfile = document.querySelector('.form_prof');
 const nameInput = document.querySelector('.form__item_prof_title');
 const jobInput = document.querySelector('.form__item_prof_subtitle');
 const submitButton = popupProfile.querySelector('.form__save-button');
+const profileAvatar = document.querySelector('.profile__avatar');
+const popupProfileAvatar = document.querySelector('.popup_type_avatar_photo');
+
+export function createProfileFromServer (data) {
+  profileName.textContent = data.name;
+  profileJob.textContent = data.about;
+  profileAvatar.src = data.avatar;
+}
 
 function submitProfileForm(evt) {
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
+  editProfileData({name: nameInput.value, about: jobInput.value})
+  .then((dataFromServer)=>{
+    profileName.textContent = dataFromServer.name;
+    profileJob.textContent = dataFromServer.about;
+  })
   closePopUp(popupProfile);
 };
 
@@ -32,4 +44,7 @@ buttonEditProfile.addEventListener('click', () => {
 buttonSubmitProfile.addEventListener('submit', (evt) => {
   submitProfileForm(evt);
   });
+profileAvatar.addEventListener('click',()=>{
+  openPopUp(popupProfileAvatar);
+})
 };

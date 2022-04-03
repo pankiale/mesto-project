@@ -7,6 +7,19 @@
 	margin-bottom: 47px;
 	column-gap: 20px;
 	row-gap: 8px;
+  position: relative;
+}
+
+.profile:hover::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  left: 47px;
+  top: 47px;
+  background-image: url("../../images/avatar_edit.svg");
+  background-size: 26px;
+  background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 590px) {
@@ -20,4 +33,8 @@
 			'. subtitle .' 'add-button add-button add-button';
 		margin-bottom: 36px;
 	}
+  .profile:hover::after {
+    left: calc((100% - 13px)/2);
+    top: 47px;
+  }
 }

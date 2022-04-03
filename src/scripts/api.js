@@ -1,5 +1,5 @@
 const config = {
-  url: "https://nomoreparties.co/v1/plus-cohort-8/cards",
+  url: "https://nomoreparties.co/v1/plus-cohort-8",
   headers: {
       "Authorization": "18049393-07e7-4f78-bc3d-d0e524a4d71d",
       "Content-type": "application/json",
@@ -11,7 +11,21 @@ const onResponse = (res) => {
 }
 
 export function getAllCards () {
-  return fetch(config.url, {headers: config.headers})
+  return fetch(`${config.url}/cards`, {headers: config.headers})
+    .then(onResponse);
+}
+
+export function getProfileData () {
+  return fetch(`${config.url}/users/me`, {headers: config.headers})
+    .then(onResponse);
+}
+
+export function editProfileData (data) {
+  return fetch(`${config.url}/users/me`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify(data)
+  })
     .then(onResponse);
 }
 

@@ -15,11 +15,11 @@
 </header>
 <main class="content">
   <section class="profile">
-    <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%>" alt="Аватар пользователя">
-    <h1 class="profile__title">Жак-Ив Кусто</h1>
+    <img class="profile__avatar active-element_hover_avatar" src="" alt="Аватар пользователя">
+    <h1 class="profile__title"></h1>
     <button aria-label="кнопка редактирования профиля"
             class="profile__edit-button  active-element active-element_hover_all-other" type="button"></button>
-    <p class="profile__subtitle">Исследователь океана</p>
+    <p class="profile__subtitle"></p>
     <button aria-label="кнопка добавления профиля"
             class="profile__add-button  active-element active-element_hover_all-other" type="button"></button>
   </section>
@@ -102,6 +102,29 @@
         placeholder="Ссылка на картинку"
         required>
         <span id="photo-link-error" class="form__error"></span>
+      </fieldset>
+      <button class="form__save-button  active-element active-element_hover_save-button" type="submit">Сохранить
+      </button>
+    </form>
+  </div>
+</div>
+<div class="popup popup_type_avatar_photo">
+  <div class="popup__container">
+    <button aria-label="кнопка закрытия поп-ап"
+            class="popup__close-button  popup__close-button_photo-card active-element active-element_hover_all-other"
+            type="button"></button>
+    <form class="form form_avatar_photo" name="form_avatar_photo" novalidate>
+      <h2 class="form__title">Обновить аватар</h2>
+      <fieldset class="form__input-container">
+        <input
+        type="url"
+        name="avatar-photo-link"
+        id="avatar-photo-link"
+        class="form__item form__item_avatar_photo_link"
+        autocomplete="off"
+        placeholder="Ссылка на аватар"
+        required>
+        <span id="avatar-photo-link-error" class="form__error"></span>
       </fieldset>
       <button class="form__save-button  active-element active-element_hover_save-button" type="submit">Сохранить
       </button>

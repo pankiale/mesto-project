@@ -5,6 +5,7 @@
 @import url(../blocks/active-element/_hover/active-element_hover_all-other.css);
 @import url(../blocks/active-element/_hover/active-element_hover_like.css);
 @import url(../blocks/active-element/_hover/active-element_hover_save-button.css);
+@import url(../blocks/active-element/_hover/active-element_hover_avatar.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/profile.css);
