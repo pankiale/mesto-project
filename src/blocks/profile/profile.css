@@ -11,15 +11,10 @@
 }
 
 .profile:hover::after {
-  content: "";
+  content:  url("../../images/avatar_edit.svg");
   position: absolute;
-  width: 26px;
-  height: 26px;
   left: 47px;
   top: 47px;
-  background-image: url("../../images/avatar_edit.svg");
-  background-size: 26px;
-  background-repeat: no-repeat;
 }
 
 @media screen and (max-width: 590px) {

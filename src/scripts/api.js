@@ -29,6 +29,15 @@ export function editProfileData (data) {
     .then(onResponse);
 }
 
+export function editAvatarPicture (data) {
+  return fetch(`${config.url}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify(data)
+  })
+    .then(onResponse);
+}
+
 export function addCard (data) {
   return fetch(config.url, {
     method: 'POST',

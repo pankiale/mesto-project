@@ -26,6 +26,8 @@
 @import url(../blocks/element/__like-button/element__like-button.css);
 @import url(../blocks/element/__like-button/_active/element__like-button_active.css);
 @import url(../blocks/element/__image/popup__image.css);
+@import url(../blocks/element/__like-wrapper/element__like-wrapper.css);
+@import url(../blocks/element/__like-counter/element__like-counter.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__image-scaled/popup__image-scaled.css);
 @import url(../blocks/popup/__title/popup__title.css);
