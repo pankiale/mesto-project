@@ -2,9 +2,32 @@
   width: 120px;
   height: 120px;
   border-radius: 64px;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   grid-area: avatar;
-  object-fit: cover;
-  object-position: center;
+  position: relative;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+.profile__avatar:hover::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.profile__avatar:hover::after {
+  content:  url("../../../images/avatar_edit.svg");
+  position: absolute;
+  left: 47px;
+  top: 47px;
 }
 
 @media screen and (max-width: 590px) {

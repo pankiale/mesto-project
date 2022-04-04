@@ -7,15 +7,8 @@
 	margin-bottom: 47px;
 	column-gap: 20px;
 	row-gap: 8px;
-  position: relative;
 }
 
-.profile:hover::after {
-  content:  url("../../images/avatar_edit.svg");
-  position: absolute;
-  left: 47px;
-  top: 47px;
-}
 
 @media screen and (max-width: 590px) {
 	.profile {
@@ -28,8 +21,4 @@
 			'. subtitle .' 'add-button add-button add-button';
 		margin-bottom: 36px;
 	}
-  .profile:hover::after {
-    left: calc((100% - 13px)/2);
-    top: 47px;
-  }
 }

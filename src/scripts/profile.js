@@ -14,12 +14,13 @@ const submitButton = popupProfile.querySelector('.form__save-button');
 const profileAvatar = document.querySelector('.profile__avatar');
 const popupProfileAvatar = document.querySelector('.popup_type_avatar_photo');
 const formProfileAvatar = popupProfileAvatar.querySelector('.form');
+const submitButtonAvatar = popupProfileAvatar.querySelector('.form__save-button');
 const avatarInput = document.querySelector('.form__item_avatar_photo_link');
 
 export function createProfileFromServer (data) {
   profileName.textContent = data.name;
   profileJob.textContent = data.about;
-  profileAvatar.src = data.avatar;
+  profileAvatar.style = `background-image: url(${data.avatar})`;
 }
 
 function submitProfileForm(evt) {
@@ -36,7 +37,7 @@ function submitProfileAvatar(evt) {
   evt.preventDefault();
   editAvatarPicture({avatar: avatarInput.value})
   .then((dataFromServer)=>{
-    profileAvatar.src = dataFromServer.avatar;
+    profileAvatar.style = `background-image: url(${dataFromServer.avatar})`;
   })
   closePopUp(popupProfileAvatar);
 };
@@ -65,6 +66,6 @@ profileAvatar.addEventListener('click',()=>{
   errorMessages.forEach(error => error.textContent = '');
   const errorInputs = popupProfileAvatar.querySelectorAll('.form__item_error');
   errorInputs.forEach(error => error.classList.remove('form__item_error'));
-  toggleButtonState(submitButton, false, validationConfig);
+  toggleButtonState(submitButtonAvatar, false, validationConfig);
 })
 };

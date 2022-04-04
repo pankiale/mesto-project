@@ -39,7 +39,7 @@ export function editAvatarPicture (data) {
 }
 
 export function addCard (data) {
-  return fetch(config.url, {
+  return fetch(`${config.url}/cards`, {
     method: 'POST',
     headers: config.headers,
     body: JSON.stringify(data)
@@ -48,7 +48,7 @@ export function addCard (data) {
 }
 
 export function removeCard (dataId) {
-  return fetch(`${config.url}/${dataId}`, {
+  return fetch(`${config.url}/cards/${dataId}`, {
     method: 'DELETE',
     headers: config.headers,
   })
@@ -60,6 +60,22 @@ export function editCard (dataId) {
     method: 'PUT',
     headers: config.headers,
     body: JSON.stringify(data)
+  })
+    .then(onResponse);
+}
+
+export function addLike (dataId) {
+  return fetch(`${config.url}/cards/likes/${dataId}`, {
+    method: 'PUT',
+    headers: config.headers
+  })
+    .then(onResponse);
+}
+
+export function removeLike (dataId) {
+  return fetch(`${config.url}/cards/likes/${dataId}`, {
+    method: 'DELETE',
+    headers: config.headers
   })
     .then(onResponse);
 }

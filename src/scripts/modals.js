@@ -16,7 +16,6 @@ export function closePopUp(popupName) {
   document.removeEventListener('keydown', handleEscKey);
 };
 
-/*Геннадий а вы как репетитор работаете? я бы с удовольствием с вами позанимался*/
 export function setPopupEventListeners() {
   const popups = document.querySelectorAll('.popup')
   popups.forEach((popup) => {
