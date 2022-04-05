@@ -37,11 +37,17 @@ export function createPhoto(cardData) {
     addLike(cardData._id)
     .then((dataFromServer) => {
       photoCardLikeCounter.textContent = `${dataFromServer.likes.length}`;
+    })
+    .catch((err) => {
+      console.log(err); // выводим ошибку в консоль
     });
   } else {
     removeLike(cardData._id)
     .then((dataFromServer) => {
       photoCardLikeCounter.textContent = `${dataFromServer.likes.length}`;
+    })
+    .catch((err) => {
+      console.log(err); // выводим ошибку в консоль
     });
   }
   });
@@ -57,6 +63,9 @@ export function createPhoto(cardData) {
     removeCard(cardData._id)
   .then(() => {
     photoCardDeleteButton.closest('.element').remove();
+  })
+  .catch((err) => {
+    console.log(err); // выводим ошибку в консоль
   });
   });
 
@@ -68,5 +77,5 @@ export function renderPhoto(photo) {
 };
 
 export function createInitialSetOfCards (data) {
-  data.forEach(cardData => renderPhoto(createPhoto(cardData)));
+  data.reverse().forEach(cardData => renderPhoto(createPhoto(cardData)));
 };

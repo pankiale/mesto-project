@@ -10,11 +10,17 @@ import { getAllCards, addCard, removeCard, editCard, getProfileData } from './ap
 getProfileData()
   .then((data) => {
     createProfileFromServer(data);
+  })
+  .catch((err) => {
+    console.log(err); // выводим ошибку в консоль
   });
 
 getAllCards()
   .then((data) => {
     createInitialSetOfCards(data);
+  })
+  .catch((err) => {
+    console.log(err); // выводим ошибку в консоль
   });
 
 enableValidation(validationConfig);

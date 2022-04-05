@@ -25,25 +25,38 @@ export function createProfileFromServer (data) {
 
 function submitProfileForm(evt) {
   evt.preventDefault();
+  submitButton.textContent = 'Сохранение...';
   editProfileData({name: nameInput.value, about: jobInput.value})
   .then((dataFromServer)=>{
     profileName.textContent = dataFromServer.name;
     profileJob.textContent = dataFromServer.about;
   })
-  closePopUp(popupProfile);
+  .catch((err) => {
+    console.log(err); // выводим ошибку в консоль
+  })
+  .finally(() => {
+    closePopUp(popupProfile);
+  });
 };
 
 function submitProfileAvatar(evt) {
   evt.preventDefault();
+  submitButtonAvatar.textContent = 'Сохранение...';
   editAvatarPicture({avatar: avatarInput.value})
   .then((dataFromServer)=>{
     profileAvatar.style = `background-image: url(${dataFromServer.avatar})`;
   })
-  closePopUp(popupProfileAvatar);
+  .catch((err) => {
+    console.log(err); // выводим ошибку в консоль
+  })
+  .finally(() => {
+    closePopUp(popupProfileAvatar);
+  });
 };
 
 export function setEventListenersProfile () {
 buttonEditProfile.addEventListener('click', () => {
+  submitButton.textContent = 'Сохранить';
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopUp(popupProfile);
@@ -60,6 +73,7 @@ formProfileAvatar.addEventListener('submit', (evt) => {
   submitProfileAvatar(evt);
   });
 profileAvatar.addEventListener('click',()=>{
+  submitButtonAvatar.textContent = 'Сохранить';
   openPopUp(popupProfileAvatar);
   formProfileAvatar.reset();
   const errorMessages = popupProfileAvatar.querySelectorAll('.form__error');

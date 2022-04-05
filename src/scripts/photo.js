@@ -15,15 +15,22 @@ const submitButton = popupPhoto.querySelector('.form__save-button');
 
 function submitPhotoForm(evt) {
   evt.preventDefault();
+  submitButton.textContent = 'Сохранение...';
   addCard({name: photoName.value, link: photoLink.value})
   .then((data) => {
     renderPhoto(createPhoto(data));
+  })
+  .catch((err) => {
+    console.log(err); // выводим ошибку в консоль
+  })
+  .finally(() => {
+    closePopUp(popupPhoto);
   });
-  closePopUp(popupPhoto);
 };
 
 export function setEventListenersPhoto () {
 buttonAddPhoto.addEventListener('click', () => {
+  submitButton.textContent = 'Сохранить';
   openPopUp(popupPhoto);
   formReset.reset();
   const errorMessages = popupPhoto.querySelectorAll('.form__error');
