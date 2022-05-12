@@ -6,9 +6,63 @@ const photoCardNameScaled = document.querySelector(".popup__title");
 const popupPhotoScaled = document.querySelector(".popup_type_photo-scaled");
 const photoContainer = document.querySelector(".elements");
 
+
+export default class Card {
+  constructor (data, selector) {
+    this._selector = selector;
+    this._name = data.name;
+    this._link = data.link;
+    this._likes = data.likes;
+    this._ownerId = data.owner._id;
+    this._cardId = data._id;
+  }
+
+  _getElement () {
+    const photoCard = document
+    .querySelector(this._selector)
+    .content
+    .querySelector(".element")
+    .cloneNode(true);
+
+    return photoCard;
+  }
+
+  _findMyLikes() {
+    return this._likes.findIndex((like) => like._id === userId);
+  }
+
+  generate () {
+    this._element = this._getElement();
+    this._element.querySelector(".element__title").textContent = this._name;
+    this._element.querySelector(".element__image").src = this._link;
+    this._element.querySelector(".element__image").alt = this._name;
+    this._element.querySelector(".element__like-counter").textContent = this._likes.length;
+    if (this._findMyLikes() > -1) {
+      this._element.querySelector(".element__like-button").classList.add("element__like-button_active");
+    }
+    if (this._ownerId !== userId) {
+      this._element.querySelector(".element__delete-button").style = "display: none";
+    }
+    this._setEventListeners();
+
+    return this._element;
+  }
+
+  _setEventListeners() {
+    this._element.addEventListener('click', () => {
+      this._handleOpenPopup();
+    });
+
+    popupCloseButton.addEventListener('click', () => {
+      this._handleClosePopup();
+    });
+  }
+}
+
 function findMyLikes(cardData) {
   return cardData.likes.findIndex((like) => like._id === userId);
 }
+
 
 export function createPhoto(cardData) {
   /*  эти константы внутри фукции поскольку я создаю уникальную карточку из темплейта а затем ищу в ней элементы*/
