@@ -1,5 +1,5 @@
 import { openPopUp } from "./modals";
-import { addLike, removeCard, removeLike } from "./api";
+import { api } from "./index";
 import { userId } from "./index";
 const photoCardImageScaled = document.querySelector(".popup__image-scaled");
 const photoCardNameScaled = document.querySelector(".popup__title");
@@ -12,17 +12,12 @@ function findMyLikes(cardData) {
 
 export function createPhoto(cardData) {
   /*  эти константы внутри фукции поскольку я создаю уникальную карточку из темплейта а затем ищу в ней элементы*/
-  const photoTemplate = document.querySelector("#element-template").content;
-  const photoCard = photoTemplate.querySelector(".element").cloneNode(true);
+  const photoCard = document.querySelector("#element-template").content.querySelector(".element").cloneNode(true);
   const photoCardImage = photoCard.querySelector(".element__image");
   const photoCardTitle = photoCard.querySelector(".element__title");
   const photoCardLikeButton = photoCard.querySelector(".element__like-button");
-  const photoCardDeleteButton = photoCard.querySelector(
-    ".element__delete-button"
-  );
-  const photoCardLikeCounter = photoCard.querySelector(
-    ".element__like-counter"
-  );
+  const photoCardDeleteButton = photoCard.querySelector(".element__delete-button");
+  const photoCardLikeCounter = photoCard.querySelector(".element__like-counter");
 
   photoCardTitle.textContent = cardData.name;
   photoCardImage.src = cardData.link;
@@ -37,7 +32,7 @@ export function createPhoto(cardData) {
 
   photoCardLikeButton.addEventListener("click", (evt) => {
     if (!evt.target.classList.contains("element__like-button_active")) {
-      addLike(cardData._id)
+      api.addLike(cardData._id)
         .then((dataFromServer) => {
           photoCardLikeCounter.textContent = `${dataFromServer.likes.length}`;
         })
@@ -48,7 +43,7 @@ export function createPhoto(cardData) {
           console.log(err); // выводим ошибку в консоль
         });
     } else {
-      removeLike(cardData._id)
+      api.removeLike(cardData._id)
         .then((dataFromServer) => {
           photoCardLikeCounter.textContent = `${dataFromServer.likes.length}`;
         })
@@ -69,7 +64,7 @@ export function createPhoto(cardData) {
   });
 
   photoCardDeleteButton.addEventListener("click", () => {
-    removeCard(cardData._id)
+    api.removeCard(cardData._id)
       .then(() => {
         photoCardDeleteButton.closest(".element").remove();
       })

@@ -4,7 +4,7 @@ import { createPhoto } from "./card";
 import { renderPhoto } from "./card";
 import { validationConfig } from "./jsConstant";
 import { toggleButtonState } from "./validation";
-import { addCard } from "./api";
+import { api } from "./index";
 const buttonAddPhoto = document.querySelector(".profile__add-button");
 const buttonSubmitPhoto = document.querySelector(".form_photo");
 const popupPhoto = document.querySelector(".popup_type_photo-card");
@@ -16,7 +16,7 @@ const submitButton = popupPhoto.querySelector(".form__save-button");
 function submitPhotoForm(evt) {
   evt.preventDefault();
   submitButton.textContent = "Сохранение...";
-  addCard({ name: photoName.value, link: photoLink.value })
+  api.addCard({ name: photoName.value, link: photoLink.value })
     .then((data) => {
       renderPhoto(createPhoto(data));
     })

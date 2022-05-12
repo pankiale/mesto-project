@@ -2,7 +2,7 @@ import { openPopUp } from "./modals";
 import { closePopUp } from "./modals";
 import { validationConfig } from "./jsConstant";
 import { toggleButtonState } from "./validation";
-import { editProfileData, editAvatarPicture } from "./api";
+import { api } from "./index";
 const profileName = document.querySelector(".profile__title");
 const profileJob = document.querySelector(".profile__subtitle");
 const buttonEditProfile = document.querySelector(".profile__edit-button");
@@ -27,7 +27,7 @@ export function createProfileFromServer(data) {
 function submitProfileForm(evt) {
   evt.preventDefault();
   submitButton.textContent = "Сохранение...";
-  editProfileData({ name: nameInput.value, about: jobInput.value })
+  api.editProfileData({ name: nameInput.value, about: jobInput.value })
     .then((dataFromServer) => {
       profileName.textContent = dataFromServer.name;
       profileJob.textContent = dataFromServer.about;
@@ -40,7 +40,7 @@ function submitProfileForm(evt) {
 function submitProfileAvatar(evt) {
   evt.preventDefault();
   submitButtonAvatar.textContent = "Сохранение...";
-  editAvatarPicture({ avatar: avatarInput.value })
+  api.editAvatarPicture({ avatar: avatarInput.value })
     .then((dataFromServer) => {
       profileAvatar.style = `background-image: url(${dataFromServer.avatar})`;
     })

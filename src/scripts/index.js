@@ -1,14 +1,17 @@
 import "./../pages/index.css";
 import { createInitialSetOfCards } from "./card";
-import { validationConfig } from "./jsConstant";
+import { validationConfig, config } from "./jsConstant";
 import { enableValidation } from "./validation";
 import { setEventListenersProfile, createProfileFromServer } from "./profile";
 import { setEventListenersPhoto } from "./photo";
 import { setPopupEventListeners } from "./modals";
-import { getAllCards, getProfileData } from "./api";
+import Api from "./api";
 export let userId = "";
 
-Promise.all([getProfileData(), getAllCards()])
+export const api = new Api (config);
+
+
+api.getAllData()
   .then(([profileData, cardsData]) => {
     createProfileFromServer(profileData);
     userId = profileData._id;
