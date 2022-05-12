@@ -18,9 +18,9 @@ function submitPhotoForm(evt) {
   submitButton.textContent = "Сохранение...";
   api.addCard({ name: photoName.value, link: photoLink.value })
     .then((data) => {
-      const card = new Card (data, "#element-template" )
-      renderPhoto(card);
-    })
+    const cardClass = new Card (data, "#element-template" )
+    const card = cardClass.generate()
+    renderPhoto(card);})
     .then(() => closePopUp(popupPhoto))
     .catch((err) => {
       console.log(err); // выводим ошибку в консоль

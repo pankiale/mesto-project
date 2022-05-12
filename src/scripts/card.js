@@ -88,7 +88,7 @@ export default class Card {
     });
   }
 
-  _handleLikeButton(){
+  _handleLikeButton(evt){
     if (!evt.target.classList.contains("element__like-button_active")) {
       api.addLike(this._cardId)
         .then((dataFromServer) => {
@@ -121,7 +121,9 @@ export function renderPhoto(photo) {
 
 export function createInitialSetOfCards(data) {
   data.reverse().forEach((cardData) => {
-    const card = new Card (cardData, "#element-template" )
+    const cardClass = new Card (cardData, "#element-template" );
+    const card = cardClass.generate()
+
     renderPhoto(card);
   });
 }
