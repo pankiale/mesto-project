@@ -1,6 +1,6 @@
 import { openPopUp } from "./modals";
 import { closePopUp } from "./modals";
-import { createPhoto } from "./card";
+import Card from "./card";
 import { renderPhoto } from "./card";
 import { validationConfig } from "./jsConstant";
 import { toggleButtonState } from "./validation";
@@ -18,7 +18,8 @@ function submitPhotoForm(evt) {
   submitButton.textContent = "Сохранение...";
   api.addCard({ name: photoName.value, link: photoLink.value })
     .then((data) => {
-      renderPhoto(createPhoto(data));
+      const card = new Card (data, "#element-template" )
+      renderPhoto(card);
     })
     .then(() => closePopUp(popupPhoto))
     .catch((err) => {
