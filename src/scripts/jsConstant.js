@@ -13,3 +13,5 @@ export const config = {
     "Content-type": "application/json",
   },
 };
+
+export const cardListSection = ".elements";

@@ -1,11 +1,12 @@
 import "./../pages/index.css";
-import { createInitialSetOfCards } from "./card";
-import { validationConfig, config } from "./jsConstant";
+import Card from "./card";
+import { validationConfig, config, cardListSection } from "./jsConstant";
 import { enableValidation } from "./validation";
 import { setEventListenersProfile, createProfileFromServer } from "./profile";
 import { setEventListenersPhoto } from "./photo";
 import { setPopupEventListeners } from "./modals";
 import Api from "./api";
+import Section from "./Section";
 
 export let userId = "";
 
@@ -15,7 +16,21 @@ api.getAllData()
   .then(([profileData, cardsData]) => {
     createProfileFromServer(profileData);
     userId = profileData._id;
-    createInitialSetOfCards(cardsData);
+    return cardsData;
+  })
+  .then((cardsData)=>{
+    const cardList = new Section({
+      data: cardsData,
+      renderer: (cardItem) => {
+        const cardClass = new Card (cardItem, "#element-template", api);
+        const card = cardClass.generate();
+
+        cardList.setItem(card);
+        },
+      },
+      cardListSection
+    );
+    cardList.renderItems();
   })
   .catch((err) => {
     console.log(err);

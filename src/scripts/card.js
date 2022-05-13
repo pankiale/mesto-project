@@ -1,5 +1,4 @@
 import { openPopUp } from "./modals";
-import { api } from "./index";
 import { userId } from "./index";
 const photoCardImageScaled = document.querySelector(".popup__image-scaled");
 const photoCardNameScaled = document.querySelector(".popup__title");
@@ -8,13 +7,14 @@ const photoContainer = document.querySelector(".elements");
 
 
 export default class Card {
-  constructor (data, selector) {
+  constructor (data, selector, api) {
     this._selector = selector;
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._ownerId = data.owner._id;
     this._cardId = data._id;
+    this._api = api;
   }
 
   _getElement () {
@@ -79,7 +79,7 @@ export default class Card {
   }
 
   _handleDeleteCard() {
-    api.removeCard(this._cardId)
+    this._api.removeCard(this._cardId)
     .then(() => {
       this._elementDeleteButton.closest(".element").remove();
     })
@@ -90,9 +90,9 @@ export default class Card {
 
   _handleLikeButton(evt){
     if (!evt.target.classList.contains("element__like-button_active")) {
-      api.addLike(this._cardId)
+      this._api.addLike(this._cardId)
         .then((dataFromServer) => {
-          this._elementLikeCounter.textContent = `${dataFromServer.likes.length}`;
+          this._elementLikeCounter.textContent = dataFromServer.likes.length;
         })
         .then(() =>
           this._elementLikeButton.classList.toggle("element__like-button_active")
@@ -101,9 +101,9 @@ export default class Card {
           console.log(err); // выводим ошибку в консоль
         });
     } else {
-      api.removeLike(this._cardId)
+      this._api.removeLike(this._cardId)
         .then((dataFromServer) => {
-          this._elementLikeCounter.textContent = `${dataFromServer.likes.length}`;
+          this._elementLikeCounter.textContent = dataFromServer.likes.length;
         })
         .then(() =>
         this._elementLikeButton.classList.toggle("element__like-button_active")
