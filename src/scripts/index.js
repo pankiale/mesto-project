@@ -6,10 +6,10 @@ import { setEventListenersProfile, createProfileFromServer } from "./profile";
 import { setEventListenersPhoto } from "./photo";
 import { setPopupEventListeners } from "./modals";
 import Api from "./api";
+
 export let userId = "";
 
 export const api = new Api (config);
-
 
 api.getAllData()
   .then(([profileData, cardsData]) => {

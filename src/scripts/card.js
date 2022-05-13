@@ -66,8 +66,8 @@ export default class Card {
       this._handleDeleteCard();
     });
 
-    this._elementLikeButton.addEventListener('click', () => {
-      this._handleLikeButton();
+    this._elementLikeButton.addEventListener('click', (evt) => {
+      this._handleLikeButton(evt);
     });
   }
 
