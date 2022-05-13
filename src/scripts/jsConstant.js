@@ -15,3 +15,4 @@ export const config = {
 };
 
 export const cardListSection = ".elements";
+export const profileAvatar = document.querySelector(".profile__avatar");
